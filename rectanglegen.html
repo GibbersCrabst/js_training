@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Generator</title>
+    <style>
+        body {padding: 0; margin: 0; background-color: #34363b; color: #fff; font-family: Arial, Helvetica, sans-serif;}
+        h1 {font-family:'Times New Roman', Times, serif, sans-serif; font-size: clamp(2.25rem, 5vw, 5rem); font-weight: normal; color: goldenrod; margin: 0 0 1.5rem;}
+        h4 {font-family: inherit; font-size: clamp(1rem, 1.5vw, 1.5rem); font-weight: normal;}
+        .wrapper {width: clamp(420px, 70vw, 1400px); margin: 0 auto;}
+        .container {box-sizing: border-box; padding: clamp(1.25rem, 3vw, 3rem); background-color: #5d5e5f;}
+        .form-container {display: flex; flex-flow: row nowrap; margin: 0 0 1.5rem;}
+        .form-container label {display: block; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.15rem; font-weight: normal; color: #ccc; margin: 0 0 0.875rem;}
+        .form-container input {padding: 0.625rem; border: 0; border-radius: 0.5rem; background-color: #fff;}
+        .input-width {margin-right: 2.5rem;}
+        .form-submit button {background-color: goldenrod; border: 0; border-radius: 0.5rem; padding: 0.625rem 1.25rem; color: #34363b; font-weight: bold; text-transform: uppercase; letter-spacing: 0.15rem; transition: background-color 0.3s ease; cursor: pointer;}
+        .form-submit button:hover {background-color: #fff;}
+        .rectangle {margin: 1.25rem 0 0; display: none; background-color: goldenrod;}
+        .result-text {margin: 1.25rem 0 0;};
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <h1>Rectangle Generator</h1>
+            <div class="generator-text">
+                <h4>Enter values for width and height in the boxes below</h4>
+            </div>
+            <div class="form-container">
+                <div class="input-width">
+                    <label>Enter width in px: </label><input class="inputWidth" type="text">
+                </div>
+                <div class="input-height">
+                    <label>Enter height in px: </label><input class="inputHeight" type="text">
+                </div>
+            </div>
+            <div class="form-submit">
+                <button class="formSubmit">
+                    Submit
+                </button>
+            </div>
+            <div class="rectangle">&nbsp;</div>
+            <div class="result-text">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputWidth = document.querySelector('.inputWidth');
+        const inputHeight = document.querySelector('.inputHeight');
+        const rect = document.querySelector('.rectangle');
+        const formSubmit = document.querySelector('.formSubmit');
+        const textResult = document.querySelector('.result-text');
+
+        formSubmit.addEventListener('click', () => {
+            const widthNum = parseInt(inputWidth.value);
+            const heightNum = parseInt(inputHeight.value);
+
+            rect.style.display = 'none'
+            switch (true) {
+                case (isNaN(widthNum) && isNaN(heightNum)):
+                    textResult.textContent = 'Neither of these are a number, are you okay?';
+                    break;
+                case (isNaN(widthNum)):
+                    textResult.textContent = 'You did not enter a number for width.';
+                    break;
+                case (isNaN(heightNum)):
+                    textResult.textContent = 'You did not enter a number for height.';
+                    break;
+                default:
+                    rect.style.display = 'block';
+                    rect.style.width = `${widthNum}px`;
+                    rect.style.height = `${heightNum}px`;
+                    textResult.textContent = `Your rectangle is ${widthNum}px wide by ${heightNum}px tall.`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circumference Calculator</title>
+    <style>
+        h2 {margin: 0 0 20px;}
+        #container {padding: 40px; background-color: #efefef;}
+        #circle {border-radius: 50%; background-image: url('photos/harold.jpg'); background-size: cover; background-repeat: no-repeat;}
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="circle"></div>
+        <div id="input-container">
+            <h2>Enter the radius of a circle and find its circumference</h2>
+            <label>Input number here and hit tab</label><br /><input class="radiusInput" type="text">
+            <p id="text-result"></p>
+        </div>
+    </div>
+    
+    <script>
+        const input = document.querySelector('.radiusInput');
+        const textResult = document.querySelector('#text-result');
+
+        function getCircum(num) {
+            return 2 * Math.PI * num;
+        }
+
+        input.addEventListener('change', () => {
+            const num = parseFloat(input.value);
+            if(isNaN(num)) {
+                textResult.textContent = 'You must enter a number!';
+            } else {
+                document.querySelector('#circle').style.width = `${getCircum(num)}px`;
+                document.querySelector('#circle').style.height = `${getCircum(num)}px`;
+                textResult.textContent = `A circle with a radius of ${num} has a circumference of ${getCircum(num)}.`;
+            }
+        });
+
+    </script>
+</body>
+</html>
